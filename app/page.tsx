@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
 
 export default function Home() {
   const [todos, setTodos] = useState([
@@ -60,7 +62,9 @@ export default function Home() {
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r" onClick={handleAddTodo}>Add</button>
+        <Button  onClick={handleAddTodo} className="rounded-r">
+         Add
+        </Button>
       </div>
 
       <ul className="w-full max-w-md">
@@ -85,15 +89,11 @@ export default function Home() {
               >
                 {todo.text}
               </label>
-               <button
+              <Button variant="destructive" size="icon"
                 onClick={() => handleDeleteTodo(todo.id)}
-                className="text-red-500 hover:text-red-700 focus:outline-none ml-4"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-                
-              </button>
+                className="ml-4"
+                ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></Button>
+              
 
             </div>
           </li>
