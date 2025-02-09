@@ -1,14 +1,12 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useTodos } from "../context/TodosContext";
 
-interface AddTodoProps {
-  onAdd: (text: string) => void;
-}
-
-export function AddTodo({ onAdd }: AddTodoProps) {
+export function AddTodo() {
   const [newTodo, setNewTodo] = useState("");
-
+  const { onAdd } = useTodos();
+  
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {

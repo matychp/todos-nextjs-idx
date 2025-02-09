@@ -1,18 +1,17 @@
 import { Button } from "@/components/ui/button";
+import { useTodos } from "../context/TodosContext";
 
 interface Todo {
   id: number;
   text: string;
   completed: boolean;
 }
-
 interface TodoItemProps {
   todo: Todo;
-  onDelete: (id: number) => void;
-  onToggle: (id: number) => void;
 }
 
-export const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete, onToggle }) => {
+export const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+  const { onToggle, onDelete } = useTodos();
   return (
     <li className="flex items-center justify-between bg-white p-4 mb-2 rounded shadow">
       <div className="flex items-center">

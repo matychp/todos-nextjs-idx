@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTodos } from '../context/TodosContext'; 
 import {TodoItem} from './TodoItem';
 
 interface Todo {
@@ -7,21 +8,15 @@ interface Todo {
   completed: boolean;
 }
 
-interface TodoListProps {
-  todos: Todo[];
-  onToggle: (id: number) => void;
-  onDelete: (id: number) => void;
-}
+export const TodoList: React.FC = () => {
+  const { todos } = useTodos();
 
-export const TodoList: React.FC<TodoListProps> = ({ todos, onToggle, onDelete }) => {
   return (
     <ul className="w-full max-w-md">
-      {todos.map((todo) => (
+      {todos.map((todo) => ( 
         <TodoItem
           key={todo.id}
           todo={todo}
-          onToggle={onToggle}
-          onDelete={onDelete}
         />
       ))}
     </ul>
