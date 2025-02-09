@@ -6,6 +6,7 @@ export default function Home() {
     { id: 1, text: "Learn React", completed: false },
     { id: 2, text: "Build a project", completed: false },
     { id: 3, text: "Deploy to Vercel", completed: false },
+
   ]);
 
   const toggleTodo = (id: number) => {
@@ -15,10 +16,49 @@ export default function Home() {
       )
     );
   };
+  
+  const [newTodo, setNewTodo] = useState("");
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTodo(event.target.value);
+  };
+
+  const handleAddTodo = () => {
+    if (newTodo.trim() !== "") {
+      setTodos([
+        ...todos,
+        {
+          id: todos.length > 0 ? Math.max(...todos.map((t) => t.id)) + 1 : 1,
+          text: newTodo,
+          completed: false,
+        },
+      ]);
+      setNewTodo("");
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleAddTodo();
+    }
+  };
+  
 
   return (
     <div className="min-h-screen p-8 flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-3xl font-bold mb-8">My To-Do List</h1>
+      <div className="w-full max-w-md mb-4 flex">
+        <input
+          type="text"
+          className="w-full p-2 border border-gray-300 rounded-l"
+          placeholder="Add a new to-do"
+          value={newTodo}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+        />
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r" onClick={handleAddTodo}>Add</button>
+      </div>
+
       <ul className="w-full max-w-md">
         {todos.map((todo) => (
           <li
