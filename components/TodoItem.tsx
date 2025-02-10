@@ -14,7 +14,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const { onToggle, onDelete } = useTodos();
   return (
     <li className="flex items-center justify-between bg-white p-4 mb-2 rounded shadow">
-      <div className="flex items-center">
+      <div className="flex items-center justify-between w-full">
         <input
           type="checkbox"
           id={`todo-${todo.id}`}
@@ -28,12 +28,14 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
             todo.completed ? "line-through text-gray-500" : ""
           }`}
         >
-          {todo.text}
-        </label>
+          {todo.text}</label>
+          
+      
+      
         <Button
           variant="destructive"
           size="icon"
-          onClick={() => onDelete(todo.id)}
+            onClick={() => onDelete(todo.id)}
           className="ml-4"
         >
           <svg
