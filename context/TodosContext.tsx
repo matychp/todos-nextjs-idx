@@ -10,6 +10,7 @@ interface Todo {
 interface TodosContextProps {
   todos: Todo[];
   onToggle: (id: number) => void;
+  setTodos: (todos: Todo[]) => void;
   onDelete: (id: number) => void;
   onAdd: (text: string) => void;
 }
@@ -46,11 +47,16 @@ export const TodosProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     ]);
   };
 
+  const setAllTodos = (todos:Todo[]) => {
+    setTodos(todos)
+  }
+
   const contextValue: TodosContextProps = {
     todos,
     onToggle,
     onDelete,
     onAdd,
+    setTodos: setAllTodos,
   };
 
   return (
@@ -65,5 +71,5 @@ export const useTodos = () => {
   if (context === undefined) {
     throw new Error('useTodos must be used within a TodosProvider');
   }
-  return context;
+  return {todos: context.todos, onToggle: context.onToggle, onDelete: context.onDelete, onAdd: context.onAdd, setTodos: context.setTodos}
 };
